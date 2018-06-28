@@ -31,9 +31,26 @@ function chainx_add_toplevel_menu() {
 								'dashicons-admin-generic',
 								null
 							);
+
+	add_action( 'load-' . $chainx_calendar_page, 'load_calendar_libs');
 	
 }
 add_action( 'admin_menu', 'chainx_add_toplevel_menu' );
+
+function load_calendar_libs(){
+	add_action('admin_enqueue_scripts', 'enqueue_calendar_libs');
+}
+
+function enqueue_calendar_libs(){
+
+	wp_enqueue_style('jquery', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/fullcalendar/fullcalendar.min.css');
+	
+	wp_enqueue_script('jquery', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/fullcalendar/jquery.min.js', array(), null);
+	wp_enqueue_script('jquery-ui', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/fullcalendar/jquery-ui.min.js', array(), null);
+	wp_enqueue_script('moment', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/fullcalendar/moment.min.js', array(), null);
+	wp_enqueue_script('fullcalendar', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/fullcalendar/fullcalendar.min.js', array('jquery', 'moment'), null);
+
+}
 
 // display the plugin settings page
 function chainx_display_calendar() {
