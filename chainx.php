@@ -49,6 +49,8 @@ function enqueue_calendar_libs(){
 	wp_enqueue_script('jquery-ui', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/fullcalendar/jquery-ui.min.js', array(), null);
 	wp_enqueue_script('moment', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/fullcalendar/moment.min.js', array(), null);
 	wp_enqueue_script('fullcalendar', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/fullcalendar/fullcalendar.min.js', array('jquery', 'moment'), null);
+	
+	wp_enqueue_script('chainx', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/chainx.js', array('jquery', 'fullcalendar'), null);
 
 }
 
