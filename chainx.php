@@ -52,6 +52,29 @@ function enqueue_calendar_libs(){
 	
 	wp_enqueue_script('chainx', plugin_dir_url( dirname( __FILE__ ) ) . 'chainx/chainx.js', array('jquery', 'fullcalendar'), null);
 
+	wp_localize_script('chainx', 'chainx_vars', array( 'events' => chainx_post_dates_to_array() ));
+}
+
+function chainx_post_dates_to_array(){
+
+	$post_and_dates = array();
+
+	$query = new WP_Query(array('post_status' => 'publish'));
+
+	if ($query->have_posts()) {
+		while($query->have_posts()) :
+			$query->the_post();
+			$temp_array = array(
+						'title' => get_the_title(),
+						'start' => get_the_date('Y-m-d', get_the_ID())
+			);
+
+			array_push($post_and_dates, $temp_array);
+		endwhile;
+	}
+
+	return $post_and_dates;
+
 }
 
 // display the plugin settings page
